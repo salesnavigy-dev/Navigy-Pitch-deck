@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigy — Presentación Comercial 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+
+/* ─── RESET ──────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--surf);color:var(--ink)}
+
+/* ─── TOKENS (Navigy Brand Guidelines 2026) ──────────────── */
+:root{
+  --blue:        #1769C2;
+  --blue-light:  #4A8FD9;
+  --blue-deep:   #0F4F96;
+  --blue-subtle: #E8F1FB;
+  --blue2:       #4A8FD9;
+  --bluedim:     #E8F1FB;
+  --ink:         #0D0F14;
+  --slate:       #3D4555;
+  --muted:       #7C869A;
+  --line:        #E2E6EF;
+  --surf:        #F5F6F9;
+  --warm:        #faf8f4;
+  --warm2:       #ede8df;
+  --card:        #FFFFFF;
+  --green:       #1DAA72;
+  --green-bg:    #EBF8F3;
+  --warning:     #F59E0B;
+  --red:         #E03B3B;
+  /* spacing scale (4px base) */
+  --sp-xs:4px;--sp-sm:8px;--sp-md:12px;--sp-lg:16px;--sp-xl:24px;
+  --sp-2xl:32px;--sp-3xl:48px;--sp-4xl:64px;
+  /* radius scale */
+  --r-tag:4px;--r-ui:8px;--r-card:12px;
+}
+
+/* ─── PROGRESS BAR ───────────────────────────────────────── */
+.progress-bar{position:fixed;top:0;left:0;right:0;height:3px;background:var(--line);z-index:400}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--blue-light));transition:width .38s cubic-bezier(.16,1,.3,1);width:0%}
+
+/* ─── SLIDE SYSTEM ───────────────────────────────────────── */
+.slide{
+  position:absolute;inset:0;width:100%;height:100%;
+  display:flex;flex-direction:column;overflow:hidden;
+  opacity:0;pointer-events:none;
+  transition:opacity .38s cubic-bezier(.16,1,.3,1), transform .38s cubic-bezier(.16,1,.3,1);
+  background:var(--surf);
+  transform:translateY(22px);
+}
+.slide.active{opacity:1;pointer-events:all;transform:translateY(0)}
+
+@keyframes up{
+  from{opacity:0;transform:translateY(14px)}
+  to  {opacity:1;transform:translateY(0)}
+}
+/* Brand spring entrance: cubic-bezier(0.34,1.56,0.64,1) */
+.slide.active .a{animation:up .42s cubic-bezier(.34,1.56,.64,1) both}
+.slide.active .d1{animation-delay:.06s}
+.slide.active .d2{animation-delay:.12s}
+.slide.active .d3{animation-delay:.18s}
+.slide.active .d4{animation-delay:.24s}
+.slide.active .d5{animation-delay:.30s}
+.slide.active .d6{animation-delay:.36s}
+.slide.active .d7{animation-delay:.42s}
+.slide:not(.active) .a{opacity:0;animation:none}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* ─── NAV BAR ────────────────────────────────────────────── */
+.nb{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:8px;
+  z-index:300;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--line);border-radius:100px;
+  padding:5px 12px;
+  box-shadow:0 2px 16px rgba(13,15,20,.08);
+}
+.nb-btn{
+  display:flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:50%;
+  border:1px solid var(--line);background:#fff;
+  color:var(--slate);cursor:pointer;transition:all .18s;
+}
+.nb-btn:hover{border-color:var(--blue);color:var(--blue)}
+.nb-btn:disabled{opacity:.25;cursor:not-allowed;pointer-events:none}
+.nb-count{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:11.5px;font-weight:600;
+  color:var(--muted);letter-spacing:.04em;
+  min-width:40px;text-align:center;
+}
+
+/* ─── SHARED ─────────────────────────────────────────────── */
+.eyebrow{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:12px;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:16px;color:var(--blue);
+}
+.eyebrow-blue{color:var(--blue)}
+h1,h2,h3,h4{font-family:'Plus Jakarta Sans',sans-serif}
+
+/* ─── BRAND CARD (base) ──────────────────────────────────── */
+.b-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--r-card);
+  padding:var(--sp-2xl);
+  box-shadow:0 1px 3px rgba(13,15,20,.06),0 4px 12px rgba(13,15,20,.04);
+  transition:border-color 200ms ease,box-shadow 200ms ease,transform 200ms ease;
+}
+.b-card:hover{
+  border-color:var(--blue-light);
+  box-shadow:0 2px 6px rgba(23,105,194,.1),0 8px 24px rgba(23,105,194,.08);
+  transform:translateY(-2px);
+}
+
+/* ─── DASHBOARD COMPONENT ────────────────────────────────── */
+.dash{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.dash-hd{padding:clamp(10px,1.5vh,14px) clamp(14px,2vw,20px);border-bottom:1px solid var(--line)}
+.dash-hd-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.7rem,1vw,.875rem);font-weight:700;color:var(--ink)}
+.dash-hd-sub{font-size:clamp(.58rem,.75vw,.7rem);color:var(--muted);margin-top:2px}
+.dash-body{padding:clamp(10px,1.5vh,14px) clamp(14px,2vw,20px)}
+.dash-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(8px,1.5vw,12px);margin-bottom:clamp(8px,1.5vh,14px);align-items:start}
+.dash-metric-lbl{font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.dash-metric-val{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.25rem,2.5vw,2rem);font-weight:800;color:var(--ink);line-height:1}
+.dash-metric-box{height:clamp(1.5rem,3vh,2.5rem);background:#fef9c3;border-radius:4px;margin-top:5px;display:flex;align-items:center;padding:0 8px}
+.dash-metric-box span{font-size:.58rem;color:#78350f;font-weight:600}
+.dash-notif{background:var(--ink);border-radius:8px;padding:clamp(7px,1.2vh,10px) clamp(9px,1.5vw,12px);display:flex;align-items:flex-start;gap:8px}
+.dash-notif-img{width:34px;height:34px;border-radius:5px;background:linear-gradient(135deg,#5a9fd4 0%,#0369b3 100%);flex-shrink:0}
+.dash-notif-body{display:flex;flex-direction:column}
+.dash-notif-tag{display:inline-block;background:var(--blue);color:#fff;font-size:.5rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 5px;border-radius:3px;margin-bottom:3px}
+.dash-notif-text{font-size:.6rem;color:#fff;line-height:1.4}
+.dash-chart-lbl{font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.dash-bars{display:flex;align-items:flex-end;gap:clamp(2px,0.4vw,4px);height:clamp(40px,6vh,64px)}
+.bar{flex:1;border-radius:2px 2px 0 0;background:var(--ink);min-width:2px;transition:height .3s ease}
+.bar.hi{background:var(--blue)}
+.dash-axis{display:flex;justify-content:space-between;margin-top:4px}
+.dash-axis span{font-size:.5rem;color:var(--muted)}
+
+/* ═══════════════════════════════════════════════════════════
+   SLIDE 1 — HERO
+═══════════════════════════════════════════════════════════ */
+#s1{
+  background:#fff;
+  padding:clamp(28px,3.5vh,48px) clamp(44px,5.5vw,72px) clamp(52px,7vh,68px);
+  justify-content:space-between;
+  align-items:center;
+}
+#s1::before{
+  content:'';position:absolute;
+  top:-25%;left:50%;transform:translateX(-50%);
+  width:80%;height:65%;
+  background:radial-gradient(ellipse,rgba(3,105,179,.07) 0%,transparent 60%);
+  pointer-events:none;
+}
+.s1-body{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:clamp(.875rem,1.8vh,1.375rem);
+  position:relative;z-index:1;
+}
+.s1-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:clamp(.58rem,.72vw,.65rem);font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--blue);background:var(--bluedim);
+  border:1px solid rgba(3,105,179,.2);border-radius:100px;
+  padding:5px 14px;
+}
+.s1-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.s1-title{
+  font-size:clamp(2rem,4.5vw,3.75rem);font-weight:800;
+  line-height:1.08;letter-spacing:-.03em;color:var(--ink);
+  text-align:center;max-width:min(88vw,840px);
+  text-wrap:balance;
+}
+.s1-title .accent{color:var(--blue);display:block}
+.s1-sub{
+  font-size:clamp(.68rem,.9vw,.8rem);color:var(--muted);
+  text-align:center;font-weight:400;
+}
+.s1-rule{width:32px;height:2px;background:var(--blue);border-radius:2px;margin-top:.125rem}
+.s1-channels{
+  display:flex;align-items:center;gap:clamp(.625rem,1.25vw,1rem);
+  flex-wrap:wrap;justify-content:center;
+}
+.s1-ch{
+  font-size:clamp(.65rem,.88vw,.8rem);font-weight:500;color:var(--slate);
+  display:flex;align-items:center;gap:6px;
+}
+.s1-sep{color:var(--muted);font-size:.8rem;font-weight:400}
+.s1-foot{
+  display:flex;justify-content:space-between;align-items:center;
+  width:100%;position:relative;z-index:1;
+}
+.s1-label{font-size:.75rem;color:var(--muted)}
+
+/* ═══════════════════════════════════════════════════════════
+   SLIDE 2 — EL PROBLEMA
+═══════════════════════════════════════════════════════════ */
+#s2{background:#fff;padding:clamp(28px,3.5vh,48px) clamp(44px,5.5vw,72px) clamp(52px,7vh,68px);gap:clamp(1.5rem,3vh,2.5rem)}
+.s2-head{flex-shrink:0}
+.s2-eyebrow{font-size:clamp(.6rem,.75vw,.65rem);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:clamp(.5rem,1.2vh,.75rem)}
+.s2-headline{
+  font-size:clamp(1.5rem,3.2vw,2.625rem);font-weight:800;
+  line-height:1.1;letter-spacing:-.025em;color:var(--ink);
+  text-wrap:balance;
+}
+.s2-headline em{font-style:normal;color:var(--red)}
+.s2-problems{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,2vw,1.5rem);min-height:0}
+.s2-prob{
+  border:1px solid var(--line);border-radius:16px;
+  padding:clamp(1.5rem,3vh,2.25rem) clamp(1.25rem,2.5vw,2rem);
+  display:flex;flex-direction:column;gap:clamp(.75rem,1.5vh,1.125rem);
+  position:relative;overflow:hidden;background:#fff;
+}
+.s2-prob-wm{
+  position:absolute;top:-10px;right:14px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:clamp(5rem,9vw,7rem);font-weight:800;
+  color:rgba(3,105,179,.08);line-height:1;pointer-events:none;user-select:none;
+}
+.s2-prob-icon{
+  width:42px;height:42px;border-radius:10px;
+  background:rgba(3,105,179,.08);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.s2-prob-title{font-size:clamp(1.125rem,2vw,1.625rem);font-weight:800;line-height:1.15;letter-spacing:-.02em;color:var(--ink)}
+.s2-prob-desc{font-size:clamp(.68rem,.95vw,.8125rem);color:var(--muted);line-height:1.6}
+.s2-viz{margin-top:auto;padding-top:clamp(.625rem,1.2vh,1rem)}
+.s2-viz-caption{font-size:clamp(.58rem,.72vw,.625rem);color:var(--muted);margin-top:7px;font-style:italic}
+/* calendar */
+.s2-cal{display:flex;flex-direction:column;gap:5px}
+.s2-cal-row{display:flex;gap:5px}
+.s2-slot{flex:1;height:clamp(16px,2.2vh,24px);border-radius:4px;background:var(--line)}
+.s2-slot.on{background:var(--blue);opacity:.2}
+.s2-slot.on.hi{opacity:.85}
+/* funnel */
+.s2-funnel{display:flex;flex-direction:column;gap:4px}
+.s2-fstep{display:flex;align-items:baseline;gap:10px;padding:clamp(8px,1.2vh,12px) clamp(10px,1.5vw,14px);border-radius:8px}
+.s2-fstep.top{background:rgba(3,105,179,.07)}
+.s2-fstep.btm{background:rgba(239,68,68,.07)}
+.s2-fnum{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.5rem,2.8vw,2.25rem);font-weight:800;line-height:1}
+.s2-fstep.top .s2-fnum{color:var(--blue)}
+.s2-fstep.btm .s2-fnum{color:var(--red)}
+.s2-flabel{font-size:clamp(.65rem,.88vw,.78rem);color:var(--slate)}
+.s2-farrow{padding-left:14px;font-size:.875rem;color:var(--muted);line-height:1}
+
+/* ═══════════════════════════════════════════════════════════
+   SLIDE 3 — IMPACTO ECONÓMICO
+═══════════════════════════════════════════════════════════ */
+#s-impact{background:#fff;padding:clamp(3rem,6vh,5rem) clamp(2.5rem,5vw,5rem) clamp(1.5rem,3vh,3rem);gap:clamp(1rem,2vh,1.5rem)}
+.si-eyebrow{font-size:clamp(.6rem,.75vw,.65rem);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:clamp(.375rem,.8vh,.625rem)}
+.si-q{font-size:clamp(1.25rem,2.8vw,2.375rem);font-weight:800;line-height:1.12;letter-spacing:-.025em;color:var(--ink);text-wrap:balance}
+.si-compare{flex:1;display:grid;grid-template-columns:1fr 44px 1fr;gap:0;min-height:0;align-items:stretch}
+.si-col{border-radius:16px;padding:clamp(1rem,2.5vh,1.875rem) clamp(1.25rem,2.5vw,2rem);display:flex;flex-direction:column;gap:clamp(.75rem,1.5vh,1.125rem)}
+.si-col.bad{background:var(--surf);border:1px solid var(--line)}
+.si-col.good{background:rgba(3,105,179,.05);border:1px solid rgba(3,105,179,.18)}
+.si-pill{font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 11px;border-radius:100px;align-self:flex-start}
+.si-col.bad .si-pill{color:var(--muted);background:var(--line)}
+.si-col.good .si-pill{color:var(--blue);background:var(--bluedim)}
+.si-metrics{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:0}
+.si-metric{display:flex;flex-direction:column;align-items:center;gap:2px;padding:clamp(6px,1vh,10px) 0}
+.si-connector{width:1.5px;height:clamp(48px,8vh,80px);border-radius:2px;background:var(--line)}
+.si-col.good .si-connector{background:rgba(3,105,179,.3)}
+.si-metric-lbl{font-size:clamp(.58rem,.7vw,.625rem);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.si-metric-val{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.75rem,3.5vw,3rem);font-weight:800;line-height:1;color:var(--muted)}
+.si-col.good .si-metric-val{color:var(--blue)}
+.si-metric-val.highlight{color:var(--ink)}
+.si-col.good .si-metric-val.highlight{color:var(--blue)}
+.si-metric-sub{font-size:clamp(.6rem,.78vw,.7rem);color:var(--muted);margin-top:1px}
+.si-vs{display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.si-vs-badge{font-size:.6875rem;font-weight:700;color:var(--muted);background:var(--line);border-radius:100px;padding:5px 9px}
+/* result strip */
+.si-result{background:var(--ink);border-radius:14px;padding:clamp(.875rem,2vh,1.375rem) clamp(1.25rem,2.5vw,2rem);display:flex;align-items:center;gap:clamp(1rem,2.5vw,2rem);flex-shrink:0}
+.si-res-main{display:flex;flex-direction:column;gap:5px;flex-shrink:0}
+.si-res-num{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.5rem,2.8vw,2.25rem);font-weight:800;color:#fff;line-height:1;white-space:nowrap}
+.si-res-lbl{font-size:clamp(.6rem,.78vw,.7rem);color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.06em}
+.si-div{width:1px;height:36px;background:rgba(255,255,255,.15);flex-shrink:0}
+.si-econ{display:flex;flex-direction:column;gap:4px}
+.si-econ-row{display:flex;align-items:baseline;gap:8px}
+.si-econ-val{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.875rem,1.6vw,1.375rem);font-weight:800;color:#fff}
+.si-econ-lbl{font-size:clamp(.58rem,.72vw,.65rem);color:rgba(255,255,255,.45)}
+.si-close{flex:1;text-align:right}
+.si-close-text{font-size:clamp(.65rem,.9vw,.8125rem);color:rgba(255,255,255,.6);line-height:1.6;font-style:italic}
+.si-close-text strong{font-style:normal;color:#fff;font-weight:600}
+
+/* ═══════════════════════════════════════════════════════════
+   SLIDE 4 — ESQUEMA NAVIGY
+═══════════════════════════════════════════════════════════ */
+#s-navigy{background:#eef4fb;padding:0}
+#s-navigy>svg{flex:1;min-height:0;width:100%}
+
+/* ═══════════════════════════════════════════════════════════
+   SLIDE — TRÁFICO ORGÁNICO
+═══════════════════════════════════════════════════════════ */
+#s-organic{
+  background:#fff;
+  flex-direction:column;
+  padding:clamp(32px,4vh,52px) clamp(52px,6.5vw,80px) clamp(60px,7.5vh,76px);
+  gap:24px;
+}
+.sorg-hd{flex-shrink:0}
+.sorg-eyebrow{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+.sorg-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:700;letter-spacing:-.03em;color:var(--ink);line-height:1.1}
+.sorg-sub{font-size:16px;color:var(--slate);margin-top:10px;line-height:1.7}
+.sorg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;flex:1;min-height:0}
+.sorg-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(13,15,20,.06),0 4px 12px rgba(13,15,20,.04)}
+.sorg-mock{flex:1;min-height:0;background:var(--surf);overflow:hidden;display:flex;align-items:stretch}
+.sorg-mock svg{width:100%;height:100%;display:block}
+.sorg-mock img{width:100%;height:100%;display:block;object-fit:cover;object-position:top}
+.sorg-info{padding:16px 20px;border-top:1px solid var(--line);flex-shrink:0;height:88px}
+.sorg-lbl{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sorg-desc{font-size:13px;color:var(--muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sorg-footer{flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:8px}
+.sorg-footer-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.sorg-footer-text{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:var(--muted)}
+
+/* ─── Organic & Paid slides: portrait images centered ───── */
+#s-organic .sorg-mock{
+  background:var(--surf);
+  padding:20px;
+  justify-content:center;
+  align-items:center;
+}
+#s-organic .sorg-mock a{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  height:100%;
+}
+#s-organic .sorg-mock img{
+  height:100%;
+  width:auto;
+  max-width:100%;
+  object-fit:contain;
+  border-radius:16px;
+  box-shadow:0 8px 32px rgba(13,15,20,.14);
+  display:block;
+}
+#s-paid .sorg-mock{
+  background:var(--surf);
+  padding:20px;
+  justify-content:center;
+  align-items:center;
+}
+#s-paid .sorg-mock img{
+  height:100%;
+  width:auto;
+  max-width:100%;
+  object-fit:contain;
+  border-radius:16px;
+  box-shadow:0 8px 32px rgba(13,15,20,.14);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SLIDE — TRÁFICO DE PAGO
+═══════════════════════════════════════════════════════════ */
+#s-paid{
+  background:#fff;
+  flex-direction:column;
+  padding:clamp(32px,4vh,52px) clamp(52px,6.5vw,80px) clamp(60px,7.5vh,76px);
+  gap:24px;
+}
+.spaid-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:24px;
+  flex:1;min-height:0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SLIDE — PROCESO (EMBUDO)
+═══════════════════════════════════════════════════════════ */
+#s-process{
+  background:#fff;
+  flex-direction:column;
+  padding:clamp(28px,3.5vh,44px) clamp(52px,6.5vw,80px) clamp(44px,5.5vh,56px);
+  gap:18px;
+}
+.sproc-header{flex-shrink:0}
+.sproc-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--blue-subtle);color:var(--blue-deep);
+  font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  padding:5px 14px;border-radius:100px;margin-bottom:12px;width:fit-content;
+}
+.sproc-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(22px,3vw,34px);font-weight:700;letter-spacing:-.03em;color:var(--ink);line-height:1.1;margin-bottom:6px}
+.sproc-sub{font-size:15px;color:var(--muted);line-height:1.6}
+/* Funnel */
+.sproc-funnel{
+  flex:1;min-height:0;
+  display:flex;flex-direction:column;
+  align-items:center;
+  gap:3px;
+}
+.sproc-level{
+  display:flex;align-items:center;
+  gap:clamp(12px,2vw,22px);
+  padding:0 clamp(18px,2.5vw,32px);
+  flex:1;
+}
+.sproc-level:first-child{border-radius:10px 10px 3px 3px}
+.sproc-level:last-child {border-radius:3px 3px 10px 10px}
+.sproc-level:not(:first-child):not(:last-child){border-radius:3px}
+.sproc-lnum{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:clamp(16px,2.2vw,26px);font-weight:800;
+  letter-spacing:-.02em;line-height:1;
+  flex-shrink:0;opacity:.55;
+}
+.sproc-ldivider{width:1px;height:24px;flex-shrink:0;opacity:.25;background:currentColor}
+.sproc-lcontent{display:flex;flex-direction:column;gap:2px}
+.sproc-ltitle{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:clamp(12px,1.15vw,14px);font-weight:700;line-height:1.3;
+}
+.sproc-ldesc{font-size:clamp(11px,.95vw,13px);line-height:1.4;opacity:.7}
+
+/* ═══════════════════════════════════════════════════════════
+   SLIDE — SOFTWARE NAVIGY
+═══════════════════════════════════════════════════════════ */
+#s-software{
+  background:#fff;
+  flex-direction:column;
+  padding:clamp(32px,4vh,52px) clamp(52px,6.5vw,80px) clamp(60px,7.5vh,76px);
+  gap:20px;
+}
+.ssys-hd{flex-shrink:0}
+.ssys-ey{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+.ssys-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:700;letter-spacing:-.03em;color:var(--ink);line-height:1.1}
+.ssys-sub{font-size:16px;color:var(--slate);margin-top:10px;line-height:1.7}
+.ssys-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;flex:1;min-height:0}
+.ssys-card{border:1px solid var(--line);border-radius:12px;padding:20px 22px;display:flex;flex-direction:column;background:#fff;box-shadow:0 1px 3px rgba(13,15,20,.06),0 4px 12px rgba(13,15,20,.04)}
+.ssys-card-top{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.ssys-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ssys-cat{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.ssys-card-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.ssys-card-desc{font-size:13px;color:var(--muted);line-height:1.55;flex:1}
+.ssys-card-trans{
+  margin-top:12px;
+  padding:7px 12px;
+  border-radius:8px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:12px;font-weight:700;
+  line-height:1.3;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SLIDE — PRECIOS
+═══════════════════════════════════════════════════════════ */
+#s-pricing{
+  background:#fff;
+  flex-direction:column;
+  padding:clamp(32px,4vh,52px) clamp(52px,6.5vw,80px) clamp(60px,7.5vh,76px);
+  gap:20px;
+}
+.sprice-hd{flex-shrink:0}
+.sprice-ey{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+.sprice-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:700;letter-spacing:-.03em;color:var(--ink);line-height:1.1}
+.sprice-accent{color:var(--blue)}
+.sprice-sub{font-size:16px;color:var(--slate);margin-top:10px;line-height:1.7}
+.sprice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;flex:1;min-height:0}
+.sprice-card{
+  border:1px solid var(--line);border-radius:12px;
+  padding:24px 22px;
+  display:flex;flex-direction:column;position:relative;
+  background:#fff;box-shadow:0 1px 3px rgba(13,15,20,.06),0 4px 12px rgba(13,15,20,.04);
+}
+.sprice-card.featured{border-color:var(--blue);border-top:2px solid var(--blue);box-shadow:0 2px 6px rgba(23,105,194,.1),0 8px 24px rgba(23,105,194,.08)}
+.sprice-badge{
+  position:absolute;top:-1px;left:16px;
+  background:var(--blue);color:#fff;
+  font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  padding:3px 10px;border-radius:0 0 8px 8px;
+}
+.sprice-icon{
+  width:32px;height:32px;background:var(--surf);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--slate);margin-bottom:12px;flex-shrink:0;
+}
+.sprice-name{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.sprice-price-row{display:flex;align-items:baseline;gap:6px;margin-bottom:2px}
+.sprice-amount{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1}
+.sprice-old{font-size:14px;color:var(--muted);text-decoration:line-through}
+.sprice-period{font-size:13px;color:var(--muted)}
+.sprice-desc{font-size:13px;color:var(--muted);line-height:1.55;margin:10px 0}
+.sprice-features{display:flex;flex-direction:column;gap:8px;flex:1}
+.sprice-feature{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--slate);line-height:1.45}
+.sprice-check{
+  width:16px;height:16px;border-radius:50%;
+  background:var(--green-bg);color:var(--green);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;font-size:10px;font-weight:700;
+}
+.sprice-note{margin-top:12px;font-size:12px;color:var(--muted);font-style:italic}
+.sprice-footer{flex-shrink:0;text-align:center;font-size:13px;color:var(--muted)}
+
+/* ═══════════════════════════════════════════════════════════
+   SLIDE 14 — END CARD
+═══════════════════════════════════════════════════════════ */
+#s14{
+  background:var(--blue);
+  flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:clamp(2rem,4vh,4rem) clamp(3rem,6vw,7rem);
+  text-align:center;
+  overflow:hidden;
+  position:relative;
+}
+.s14-texture{
+  position:absolute;inset:0;z-index:0;
+  background-image:repeating-linear-gradient(
+    -45deg,transparent,transparent 10px,
+    rgba(255,255,255,.018) 10px,rgba(255,255,255,.018) 11px
+  );
+}
+.s14-topbar{
+  position:absolute;top:0;left:0;right:0;z-index:2;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:clamp(.875rem,2vh,1.25rem) clamp(1.5rem,4vw,3rem);
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+.s14-tb-url{font-size:.72rem;font-weight:600;color:rgba(255,255,255,.65);letter-spacing:.02em}
+.s14-tb-copy{font-size:.68rem;color:rgba(255,255,255,.38)}
+.s14-content{
+  position:relative;z-index:3;
+  display:flex;flex-direction:column;align-items:center;
+  gap:clamp(10px,1.8vh,20px);
+}
+.s14-logo{height:clamp(28px,4vh,48px);object-fit:contain;mix-blend-mode:screen;filter:brightness(1.2)}
+.s14-divider{width:40px;height:2px;background:rgba(255,255,255,.25);border-radius:2px}
+.s14-title{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:clamp(1.6rem,3.5vw,2.8rem);font-weight:800;
+  letter-spacing:-.03em;color:#fff;line-height:1.1;
+}
+.s14-sub{
+  font-size:clamp(.8rem,1.2vw,1rem);
+  color:rgba(255,255,255,.7);
+  line-height:1.5;
+}
+.s14-cta{
+  display:inline-block;
+  margin-top:clamp(6px,1vh,10px);
+  padding:clamp(10px,1.5vh,14px) clamp(24px,3.5vw,40px);
+  background:#fff;
+  color:var(--blue);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:clamp(.8rem,1.2vw,.95rem);font-weight:700;
+  border-radius:100px;
+  text-decoration:none;
+  letter-spacing:.01em;
+}
+.s14-contact{
+  display:flex;align-items:center;gap:clamp(12px,2vw,24px);
+  margin-top:clamp(4px,.8vh,8px);
+  color:rgba(255,255,255,.55);
+  font-size:clamp(.65rem,.88vw,.78rem);
+}
+.s14-contact-sep{color:rgba(255,255,255,.25)}
+.s14-watermark{
+  position:absolute;bottom:0;left:0;right:0;z-index:1;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:clamp(4rem,15vw,12rem);font-weight:800;
+  letter-spacing:-.05em;line-height:.82;
+  color:rgba(0,25,65,.22);
+  padding:0 clamp(1.5rem,4vw,4rem);
+  pointer-events:none;
+}
+
+  </style>
+</head>
+<body>
+
+<!-- ─── PROGRESS BAR ─────────────────────────────────────── -->
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 1 — HERO
+═══════════════════════════════════════════════════════════ -->
+<section class="slide active" id="s1" data-index="0">
+  <div class="s1-body">
+    <div class="s1-badge a">Para clínicas dentales</div>
+    <h1 class="s1-title a d1">
+      Cómo atraer y convertir <span class="accent">pacientes de forma constante</span> en tu clínica dental
+    </h1>
+    <p class="s1-sub a d2">Sistema completo de captación, seguimiento y conversión</p>
+    <div class="s1-rule a d3"></div>
+    <div class="s1-channels a d4">
+      <span class="s1-ch">
+        <img src="lg-66d67065d6779-Google-Ads-Logo.webp" width="18" height="18" alt="" style="object-fit:contain;flex-shrink:0">
+        Google Ads
+      </span>
+      <span class="s1-sep">+</span>
+      <span class="s1-ch">
+        <img src="whatsapp-icon-free-png.webp" width="18" height="18" alt="" style="object-fit:contain;flex-shrink:0;border-radius:4px">
+        WhatsApp
+      </span>
+      <span class="s1-sep">+</span>
+      <span class="s1-ch">
+        <img src="Screenshot 2026-04-22 at 10.15.00.png" width="18" height="18" alt="" style="object-fit:contain;flex-shrink:0">
+        Software Navigy
+      </span>
+    </div>
+  </div>
+  <div class="s1-foot a d5">
+    <img src="Untitled design (1).png" height="30" alt="Navigy" style="object-fit:contain;max-width:160px">
+    <span class="s1-label">Presentación Comercial 2026</span>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 2 — EL PROBLEMA
+═══════════════════════════════════════════════════════════ -->
+<section class="slide" id="s2" data-index="1">
+  <div class="s2-head">
+    <p class="s2-eyebrow a">El problema</p>
+    <h2 class="s2-headline a d1">La mayoría de clínicas dentales tienen <em>dos problemas</em></h2>
+  </div>
+  <div class="s2-problems">
+
+    <!-- Problema 1 -->
+    <div class="s2-prob a d2">
+      <span class="s2-prob-wm">01</span>
+      <div class="s2-prob-icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <rect x="2" y="4" width="18" height="16" rx="3" stroke="#0369b3" stroke-width="1.5"/>
+          <path d="M7 2v4M15 2v4M2 9h18" stroke="#0369b3" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M8 12l6 6M14 12l-6 6" stroke="#0369b3" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <p class="s2-prob-title">No generan suficientes pacientes online</p>
+      <p class="s2-prob-desc">Dependen del boca a boca. Sin un sistema activo, el flujo es inconsistente y no se puede predecir ni escalar.</p>
+      <div class="s2-viz">
+        <div class="s2-cal">
+          <div class="s2-cal-row">
+            <div class="s2-slot"></div><div class="s2-slot on hi"></div><div class="s2-slot"></div>
+            <div class="s2-slot"></div><div class="s2-slot"></div><div class="s2-slot on"></div><div class="s2-slot"></div>
+          </div>
+          <div class="s2-cal-row">
+            <div class="s2-slot on"></div><div class="s2-slot"></div><div class="s2-slot"></div>
+            <div class="s2-slot"></div><div class="s2-slot on hi"></div><div class="s2-slot"></div><div class="s2-slot"></div>
+          </div>
+          <div class="s2-cal-row">
+            <div class="s2-slot"></div><div class="s2-slot"></div><div class="s2-slot on"></div>
+            <div class="s2-slot"></div><div class="s2-slot"></div><div class="s2-slot"></div><div class="s2-slot"></div>
+          </div>
+        </div>
+        <p class="s2-viz-caption">Agenda con pocos huecos ocupados — sin flujo constante</p>
+      </div>
+    </div>
+
+    <!-- Problema 2 -->
+    <div class="s2-prob a d3">
+      <span class="s2-prob-wm">02</span>
+      <div class="s2-prob-icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <path d="M3 3h16l-5.5 7v7l-5-2.5V10L3 3z" stroke="#0369b3" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M15 16l3 3M18 16l-3 3" stroke="#0369b3" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <p class="s2-prob-title">Los que generan no los convierten</p>
+      <p class="s2-prob-desc">Leads que llegan por WhatsApp o teléfono nunca se convierten. Se pierden por falta de seguimiento inmediato.</p>
+      <div class="s2-viz">
+        <div class="s2-funnel">
+          <div class="s2-fstep top">
+            <span class="s2-fnum">100</span>
+            <span class="s2-flabel">personas interesadas</span>
+          </div>
+          <div class="s2-farrow">↓</div>
+          <div class="s2-fstep btm">
+            <span class="s2-fnum">8</span>
+            <span class="s2-flabel">se convierten en pacientes</span>
+          </div>
+        </div>
+        <p class="s2-viz-caption">El 92% de los interesados se pierde sin respuesta</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 3 — IMPACTO ECONÓMICO
+═══════════════════════════════════════════════════════════ -->
+<section class="slide" id="s-impact" data-index="2">
+
+  <div>
+    <p class="si-eyebrow a">Impacto económico</p>
+    <h2 class="si-q a d1">¿Cuántos pacientes estás perdiendo sin darte cuenta?</h2>
+  </div>
+
+  <div class="si-compare a d2">
+
+    <!-- Sin sistema -->
+    <div class="si-col bad">
+      <span class="si-pill">Sin sistema</span>
+      <div class="si-metrics">
+        <div class="si-metric">
+          <span class="si-metric-lbl">Leads al mes</span>
+          <span class="si-metric-val">20</span>
+        </div>
+        <div class="si-connector"></div>
+        <div class="si-metric">
+          <span class="si-metric-lbl">Conversión</span>
+          <span class="si-metric-val">10%</span>
+        </div>
+        <div class="si-connector"></div>
+        <div class="si-metric">
+          <span class="si-metric-lbl">Pacientes nuevos</span>
+          <span class="si-metric-val">2</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- vs -->
+    <div class="si-vs"><span class="si-vs-badge">→</span></div>
+
+    <!-- Con Navigy -->
+    <div class="si-col good">
+      <span class="si-pill">Con Navigy</span>
+      <div class="si-metrics">
+        <div class="si-metric">
+          <span class="si-metric-lbl">Leads al mes</span>
+          <span class="si-metric-val">50</span>
+        </div>
+        <div class="si-connector"></div>
+        <div class="si-metric">
+          <span class="si-metric-lbl">Conversión</span>
+          <span class="si-metric-val">30%</span>
+        </div>
+        <div class="si-connector"></div>
+        <div class="si-metric">
+          <span class="si-metric-lbl">Pacientes nuevos</span>
+          <span class="si-metric-val highlight">15</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Result strip -->
+  <div class="si-result a d3">
+    <div class="si-res-main">
+      <span class="si-res-num">+13 pacientes</span>
+      <span class="si-res-lbl">más cada mes</span>
+    </div>
+    <div class="si-div"></div>
+    <div class="si-econ">
+      <div class="si-econ-row">
+        <span class="si-econ-val">3.900€</span>
+        <span class="si-econ-lbl">al mes</span>
+      </div>
+      <div class="si-econ-row">
+        <span class="si-econ-val">46.800€</span>
+        <span class="si-econ-lbl">al año</span>
+      </div>
+    </div>
+    <div class="si-div"></div>
+    <div class="si-close">
+      <p class="si-close-text">No es solo generar más leads…<br><strong>es convertir mejor los que ya tienes.</strong></p>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 4 — PRESENTANDO NAVIGY
+═══════════════════════════════════════════════════════════ -->
+<section class="slide" id="s-navigy" data-index="3">
+  <svg viewBox="0 0 1000 580" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <style>
+        .sc-line{stroke:rgba(3,105,179,0.32);stroke-width:1.5;fill:none;stroke-linecap:round}
+        .sc-card{fill:#fff;stroke:rgba(3,105,179,0.22);stroke-width:1}
+        .sc-pill-src{fill:#fff;stroke:rgba(3,105,179,0.5);stroke-width:1.5}
+        .sc-pill-sw{fill:rgba(3,105,179,0.1);stroke:rgba(3,105,179,0.45);stroke-width:1.5}
+        .sc-conv{fill:#fff;stroke:rgba(3,105,179,0.28);stroke-width:1}
+      </style>
+    </defs>
+
+    <!-- Background -->
+    <rect width="1000" height="580" fill="#eef4fb"/>
+
+    <!-- ═══ HEADER ═══ -->
+    <rect x="10" y="10" width="980" height="38" rx="8" fill="#0369b3"/>
+    <text x="500" y="29" text-anchor="middle" dominant-baseline="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="13" font-weight="800" letter-spacing="2" fill="#fff">NAVIGY</text>
+
+    <!-- ═══ SOURCE PILLS ═══ -->
+    <rect x="152" y="62" width="176" height="26" rx="13" class="sc-pill-src"/>
+    <text x="240" y="75" text-anchor="middle" dominant-baseline="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="700" letter-spacing="0.5" fill="#0369b3">TRÁFICO ORGÁNICO</text>
+
+    <rect x="672" y="62" width="176" height="26" rx="13" class="sc-pill-src"/>
+    <text x="760" y="75" text-anchor="middle" dominant-baseline="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="700" letter-spacing="0.5" fill="#0369b3">TRÁFICO DE PAGO</text>
+
+    <!-- ═══ V-LINES FROM PILLS ═══ -->
+    <line x1="240" y1="88" x2="240" y2="106" class="sc-line"/>
+    <line x1="760" y1="88" x2="760" y2="106" class="sc-line"/>
+
+    <!-- ═══ H-BARS TO CHANNELS ═══ -->
+    <line x1="78"  y1="106" x2="402" y2="106" class="sc-line"/>
+    <line x1="618" y1="106" x2="902" y2="106" class="sc-line"/>
+
+    <!-- ═══ V-LINES DOWN TO CHANNEL CARDS ═══ -->
+    <line x1="78"  y1="106" x2="78"  y2="124" class="sc-line"/>
+    <line x1="240" y1="106" x2="240" y2="124" class="sc-line"/>
+    <line x1="402" y1="106" x2="402" y2="124" class="sc-line"/>
+    <line x1="618" y1="106" x2="618" y2="124" class="sc-line"/>
+    <line x1="902" y1="106" x2="902" y2="124" class="sc-line"/>
+
+    <!-- ═══ CHANNEL CARDS ═══ -->
+    <rect x="4"   y="124" width="148" height="56" rx="6" class="sc-card"/>
+    <text x="78"  y="147" text-anchor="middle" dominant-baseline="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9.5" font-weight="700" fill="#0f172a">Google Maps</text>
+    <text x="78"  y="162" text-anchor="middle" dominant-baseline="middle" font-family="Inter,sans-serif" font-size="8" fill="#94a3b8">Local SEO</text>
+
+    <rect x="166" y="124" width="148" height="56" rx="6" class="sc-card"/>
+    <text x="240" y="147" text-anchor="middle" dominant-baseline="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9.5" font-weight="700" fill="#0f172a">WEB + SEO</text>
+    <text x="240" y="162" text-anchor="middle" dominant-baseline="middle" font-family="Inter,sans-serif" font-size="8" fill="#94a3b8">Landing pages</text>
+
+    <rect x="328" y="124" width="148" height="56" rx="6" class="sc-card"/>
+    <text x="402" y="147" text-anchor="middle" dominant-baseline="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9.5" font-weight="700" fill="#0f172a">Redes Sociales</text>
+    <text x="402" y="162" text-anchor="middle" dominant-baseline="middle" font-family="Inter,sans-serif" font-size="8" fill="#94a3b8">Orgánico</text>
+
+    <rect x="544" y="124" width="148" height="56" rx="6" class="sc-card"/>
+    <text x="618" y="147" text-anchor="middle" dominant-baseline="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9.5" font-weight="700" fill="#0f172a">Google Ads</text>
+    <text x="618" y="162" text-anchor="middle" dominant-baseline="middle" font-family="Inter,sans-serif" font-size="8" fill="#94a3b8">Búsqueda</text>
+
+    <rect x="828" y="124" width="148" height="56" rx="6" class="sc-card"/>
+    <text x="902" y="147" text-anchor="middle" dominant-baseline="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9.5" font-weight="700" fill="#0f172a">Meta Ads</text>
+    <text x="902" y="162" text-anchor="middle" dominant-baseline="middle" font-family="Inter,sans-serif" font-size="8" fill="#94a3b8">Facebook / Instagram</text>
+
+    <!-- ═══ V-LINES FROM CHANNEL CARDS DOWN ═══ -->
+    <line x1="78"  y1="180" x2="78"  y2="204" class="sc-line"/>
+    <line x1="240" y1="180" x2="240" y2="204" class="sc-line"/>
+    <line x1="402" y1="180" x2="402" y2="204" class="sc-line"/>
+    <line x1="618" y1="180" x2="618" y2="204" class="sc-line"/>
+    <line x1="902" y1="180" x2="902" y2="204" class="sc-line"/>
+
+    <!-- ═══ CONVERGENCE H-BAR + DROP TO BANNER ═══ -->
+    <line x1="78"  y1="204" x2="902" y2="204" class="sc-line"/>
+    <line x1="500" y1="204" x2="500" y2="220" class="sc-line"/>
+
+    <!-- ═══ CONVERGENCE BANNER ═══ -->
+    <rect x="50" y="220" width="900" height="34" rx="8" class="sc-conv"/>
+    <text x="500" y="237" text-anchor="middle" dominant-baseline="middle" font-family="Inter,sans-serif" font-size="9" fill="#475569">Todos los pacientes que llegan desde web, WhatsApp y Calendario son canalizados en nuestro software</text>
+
+    <!-- ═══ V-LINE TO SOFTWARE PILL ═══ -->
+    <line x1="500" y1="254" x2="500" y2="272" class="sc-line"/>
+
+    <!-- ═══ SOFTWARE PILL ═══ -->
+    <rect x="370" y="272" width="260" height="30" rx="15" class="sc-pill-sw"/>
+    <text x="500" y="287" text-anchor="middle" dominant-baseline="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9.5" font-weight="700" letter-spacing="0.5" fill="#0369b3">NUESTRO SOFTWARE</text>
+
+    <!-- ═══ BACKBONE LINE BEHIND STEPS ═══ -->
+    <line x1="500" y1="302" x2="500" y2="558" stroke="rgba(3,105,179,0.13)" stroke-width="1.5" fill="none"/>
+
+    <!-- ═══ SOFTWARE STEPS ═══ -->
+    <!-- Step 1 -->
+    <line x1="500" y1="302" x2="500" y2="316" class="sc-line"/>
+    <rect x="220" y="316" width="560" height="30" rx="6" class="sc-card"/>
+    <text x="500" y="331" text-anchor="middle" dominant-baseline="middle" font-family="Inter,sans-serif" font-size="9.5" fill="#475569">CRM operativo</text>
+
+    <!-- Step 2 -->
+    <line x1="500" y1="346" x2="500" y2="362" class="sc-line"/>
+    <rect x="220" y="362" width="560" height="30" rx="6" class="sc-card"/>
+    <text x="500" y="377" text-anchor="middle" dominant-baseline="middle" font-family="Inter,sans-serif" font-size="9.5" fill="#475569">Automatización de notificaciones (email y WhatsApp)</text>
+
+    <!-- Step 3 -->
+    <line x1="500" y1="392" x2="500" y2="408" class="sc-line"/>
+    <rect x="220" y="408" width="560" height="30" rx="6" class="sc-card"/>
+    <text x="500" y="423" text-anchor="middle" dominant-baseline="middle" font-family="Inter,sans-serif" font-size="9.5" fill="#475569">Reactivación de tratamientos</text>
+
+    <!-- Step 4 -->
+    <line x1="500" y1="438" x2="500" y2="454" class="sc-line"/>
+    <rect x="220" y="454" width="560" height="30" rx="6" class="sc-card"/>
+    <text x="500" y="469" text-anchor="middle" dominant-baseline="middle" font-family="Inter,sans-serif" font-size="9.5" fill="#475569">Solicitudes de reseña en Google</text>
+
+    <!-- Step 5 -->
+    <line x1="500" y1="484" x2="500" y2="500" class="sc-line"/>
+    <rect x="220" y="500" width="560" height="30" rx="6" class="sc-card"/>
+    <text x="500" y="515" text-anchor="middle" dominant-baseline="middle" font-family="Inter,sans-serif" font-size="9.5" fill="#475569">Seguimiento de email para retención</text>
+
+  </svg>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE — TRÁFICO ORGÁNICO
+═══════════════════════════════════════════════════════════ -->
+<section class="slide" id="s-organic">
+  <div class="sorg-hd a">
+    <div class="sorg-eyebrow">Canal de captación</div>
+    <h2 class="sorg-title">Tráfico orgánico</h2>
+    <p class="sorg-sub">Pacientes que llegan sin pagar por cada clic</p>
+  </div>
+
+  <div class="sorg-grid a d1">
+
+    <!-- Block 1: SEO Local / Google Maps -->
+    <div class="sorg-card">
+      <div class="sorg-mock">
+        <a href="https://www.google.com/maps/place/Cl%C3%ADnica+Dental+Mar%C3%ADtimo/@39.466426,-0.3564348,17z/data=!3m2!4b1!5s0xd60489521c8ced5:0x7c6162a73371fec8!4m6!3m5!1s0xd60489521cca4ad:0x46d28e5318d4bac0!8m2!3d39.466426!4d-0.3538599!16s%2Fg%2F1z44bcp74?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" style="display:flex;width:100%;height:100%">
+          <img src="Screenshot 2026-04-27 at 10.33.15.png" alt="SEO local Google Maps" >
+        </a>
+      </div>
+      <div class="sorg-info">
+        <div class="sorg-lbl">SEO local (Google Maps)</div>
+        <div class="sorg-desc">Pacientes que te encuentran cuando buscan clínicas en tu zona</div>
+      </div>
+    </div>
+
+    <!-- Block 2: Web posicionada en Google -->
+    <div class="sorg-card">
+      <div class="sorg-mock">
+        <a href="https://dental-maritimo.vercel.app/" target="_blank" rel="noopener" style="display:flex;width:100%;height:100%">
+          <img src="Página Web.jpg" alt="Web posicionada en Google" >
+        </a>
+      </div>
+      <div class="sorg-info">
+        <div class="sorg-lbl">Web posicionada en Google</div>
+        <div class="sorg-desc">Pacientes que llegan buscando tratamientos específicos</div>
+      </div>
+    </div>
+
+    <!-- Block 3: Redes sociales -->
+    <div class="sorg-card">
+      <div class="sorg-mock">
+        <a href="https://www.instagram.com/clinicadentalmaritimo/?hl=es" target="_blank" rel="noopener" style="display:flex;width:100%;height:100%">
+          <img src="IMG_2276.jpg" alt="Redes sociales" >
+        </a>
+      </div>
+      <div class="sorg-info">
+        <div class="sorg-lbl">Redes sociales</div>
+        <div class="sorg-desc">Pacientes que descubren tu clínica y generan confianza</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sorg-footer a d2">
+    <div class="sorg-footer-dot"></div>
+    <span class="sorg-footer-text">Una base constante de pacientes sin depender de anuncios</span>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE — TRÁFICO DE PAGO
+═══════════════════════════════════════════════════════════ -->
+<section class="slide" id="s-paid">
+  <div class="sorg-hd a">
+    <div class="sorg-eyebrow">Canal de captación</div>
+    <h2 class="sorg-title">Tráfico de pago</h2>
+    <p class="sorg-sub">Pacientes que llegan a través de campañas publicitarias</p>
+  </div>
+
+  <div class="spaid-grid a d1">
+
+    <!-- Block 1: Google Ads -->
+    <div class="sorg-card">
+      <div class="sorg-mock">
+        <img src="google ads.jpg" alt="Google Ads">
+      </div>
+      <div class="sorg-info">
+        <div class="sorg-lbl">Google Ads</div>
+        <div class="sorg-desc">Apareces en las primeras posiciones cuando buscan tratamientos en Google</div>
+      </div>
+    </div>
+
+    <!-- Block 2: Meta Ads -->
+    <div class="sorg-card">
+      <div class="sorg-mock">
+        <img src="Meta ads ejemplo.png" alt="Meta Ads">
+      </div>
+      <div class="sorg-info">
+        <div class="sorg-lbl">Meta Ads (Facebook e Instagram)</div>
+        <div class="sorg-desc">Mostramos tu clínica a potenciales pacientes mientras navegan</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sorg-footer a d2">
+    <div class="sorg-footer-dot"></div>
+    <span class="sorg-footer-text">Resultados rápidos y escalables desde el primer día</span>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE — PROCESO DE CONVERSIÓN
+═══════════════════════════════════════════════════════════ -->
+<section class="slide" id="s-process">
+
+  <div class="sproc-header a">
+    <div class="sproc-badge">Proceso Navigy</div>
+    <h2 class="sproc-title">De lead a paciente fidelizado</h2>
+    <p class="sproc-sub">Todos los contactos entran automáticamente. Sin perder ninguno.</p>
+  </div>
+
+  <div class="sproc-funnel a d1">
+
+    <div class="sproc-level" style="width:100%;background:#E8F1FB;color:#0D0F14">
+      <div class="sproc-lnum">01</div>
+      <div class="sproc-ldivider"></div>
+      <div class="sproc-lcontent">
+        <div class="sproc-ltitle">El lead entra al CRM al instante</div>
+        <div class="sproc-ldesc">Cualquier canal, cualquier hora. Cero pérdidas.</div>
+      </div>
+    </div>
+
+    <div class="sproc-level" style="width:88%;background:#c5d8f5;color:#0D0F14">
+      <div class="sproc-lnum">02</div>
+      <div class="sproc-ldivider"></div>
+      <div class="sproc-lcontent">
+        <div class="sproc-ltitle">Respuesta automática en menos de 2 minutos</div>
+        <div class="sproc-ldesc">Antes de que el paciente llame a la competencia.</div>
+      </div>
+    </div>
+
+    <div class="sproc-level" style="width:76%;background:#93b9ec;color:#0D0F14">
+      <div class="sproc-lnum">03</div>
+      <div class="sproc-ldivider"></div>
+      <div class="sproc-lcontent">
+        <div class="sproc-ltitle">Seguimiento hasta confirmar la cita</div>
+        <div class="sproc-ldesc">El sistema insiste solo. Sin que el equipo toque nada.</div>
+      </div>
+    </div>
+
+    <div class="sproc-level" style="width:64%;background:#4A8FD9;color:#fff">
+      <div class="sproc-lnum">04</div>
+      <div class="sproc-ldivider"></div>
+      <div class="sproc-lcontent">
+        <div class="sproc-ltitle">Paciente en consulta → ingreso real</div>
+        <div class="sproc-ldesc">Llega preparado. Conversión a tratamiento más alta.</div>
+      </div>
+    </div>
+
+    <div class="sproc-level" style="width:52%;background:#2a6fc4;color:#fff">
+      <div class="sproc-lnum">05</div>
+      <div class="sproc-ldivider"></div>
+      <div class="sproc-lcontent">
+        <div class="sproc-ltitle">Reseña generada automáticamente</div>
+        <div class="sproc-ldesc">Reputación en piloto automático.</div>
+      </div>
+    </div>
+
+    <div class="sproc-level" style="width:40%;background:#1769C2;color:#fff">
+      <div class="sproc-lnum">06</div>
+      <div class="sproc-ldivider"></div>
+      <div class="sproc-lcontent">
+        <div class="sproc-ltitle">Reactivación y fidelización</div>
+        <div class="sproc-ldesc">Ingresos recurrentes.</div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE — SOFTWARE NAVIGY
+═══════════════════════════════════════════════════════════ -->
+<section class="slide" id="s-software" style="background:#fff;align-items:center;justify-content:center;padding:clamp(32px,4vh,52px) clamp(52px,6.5vw,80px) clamp(60px,7.5vh,76px)">
+  <img src="Nuestro software 2.0.png" alt="Nuestro software" style="max-width:82%;max-height:82%;object-fit:contain;display:block;border-radius:12px;box-shadow:0 2px 8px rgba(13,15,20,.08),0 12px 40px rgba(13,15,20,.1);image-rendering:high-quality">
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE — PRECIOS
+═══════════════════════════════════════════════════════════ -->
+<section class="slide" id="s-pricing">
+  <div class="sprice-hd a">
+    <div class="sprice-ey">Precios</div>
+    <h2 class="sprice-title">Elige lo que necesitas.<br><span class="sprice-accent">Sin ataduras.</span></h2>
+    <p class="sprice-sub">Cada servicio funciona de forma independiente. Puedes empezar por uno y sumar el resto cuando quieras.</p>
+  </div>
+
+  <div class="sprice-grid a d1">
+
+    <!-- Card 1: Desarrollo web -->
+    <div class="sprice-card featured">
+      <div class="sprice-badge">Incluido gratis</div>
+      <div class="sprice-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div class="sprice-name">Desarrollo web</div>
+      <div class="sprice-price-row">
+        <span class="sprice-amount">0€</span>
+        <span class="sprice-old">1.500€</span>
+      </div>
+      <div class="sprice-desc">Web profesional centrada en captación de pacientes. Incluye:</div>
+      <div class="sprice-features">
+        <div class="sprice-feature"><div class="sprice-check">✓</div><span>Web mobile-first y rápida</span></div>
+        <div class="sprice-feature"><div class="sprice-check">✓</div><span>Formulario, llamada y WhatsApp</span></div>
+        <div class="sprice-feature"><div class="sprice-check">✓</div><span>Reseñas, equipo y servicios</span></div>
+        <div class="sprice-feature"><div class="sprice-check">✓</div><span>SSL, hosting y RGPD incluidos</span></div>
+      </div>
+      <div class="sprice-note">Mantenimiento mensual: 115 €/mes</div>
+    </div>
+
+    <!-- Card 2: SEO local -->
+    <div class="sprice-card">
+      <div class="sprice-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </div>
+      <div class="sprice-name">SEO local</div>
+      <div class="sprice-price-row">
+        <span class="sprice-amount">350€</span>
+        <span class="sprice-period">/mes</span>
+      </div>
+      <div class="sprice-desc">Posicionamiento orgánico en Google. Sin pagar por cada clic. Incluye:</div>
+      <div class="sprice-features">
+        <div class="sprice-feature"><div class="sprice-check">✓</div><span>Optimización web para buscadores</span></div>
+        <div class="sprice-feature"><div class="sprice-check">✓</div><span>Google Business Profile completo</span></div>
+        <div class="sprice-feature"><div class="sprice-check">✓</div><span>Apple Maps y directorios locales</span></div>
+        <div class="sprice-feature"><div class="sprice-check">✓</div><span>Resultados que crecen con el tiempo</span></div>
+      </div>
+    </div>
+
+    <!-- Card 3: Publicidad online + Software -->
+    <div class="sprice-card" style="border-color:var(--green);border-top:2px solid var(--green)">
+      <div style="position:absolute;top:-1px;right:16px;background:var(--green);color:#fff;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 10px;border-radius:0 0 8px 8px">🎁 1er mes gratis</div>
+      <div class="sprice-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+      </div>
+      <div class="sprice-name">Publicidad online + Software Navigy</div>
+      <div class="sprice-price-row">
+        <span class="sprice-amount">500€</span>
+        <span class="sprice-period">/mes</span>
+      </div>
+      <div style="display:inline-flex;align-items:center;gap:6px;background:var(--green-bg);color:var(--green);font-size:12px;font-weight:600;padding:4px 10px;border-radius:6px;margin-bottom:4px">
+        ✦ Primer mes completamente gratis
+      </div>
+      <div class="sprice-desc">Captación activa con publicidad y automatización. Incluye:</div>
+      <div class="sprice-features">
+        <div class="sprice-feature"><div class="sprice-check">✓</div><span>Gestión de Google Ads y Meta Ads</span></div>
+        <div class="sprice-feature"><div class="sprice-check">✓</div><span>CRM y seguimiento automático de leads</span></div>
+        <div class="sprice-feature"><div class="sprice-check">✓</div><span>Informe mensual de resultados</span></div>
+        <div class="sprice-feature"><div class="sprice-check">✓</div><span>Optimización continua de campañas</span></div>
+      </div>
+      <div class="sprice-note">* Presupuesto de ads no incluido</div>
+    </div>
+
+  </div>
+
+  <p class="sprice-footer a d2">Los servicios son independientes y se pueden contratar por separado o en conjunto.</p>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 14 — END CARD
+═══════════════════════════════════════════════════════════ -->
+<section class="slide" id="s14" data-index="13">
+  <div class="s14-texture"></div>
+  <div class="s14-topbar">
+    <span class="s14-tb-url">navigy.es</span>
+    <span class="s14-tb-copy">© 2026 · Todos los derechos reservados.</span>
+  </div>
+
+  <div class="s14-content">
+    <img src="Untitled design (2).png" alt="Navigy" class="s14-logo a">
+    <div class="s14-divider a d1"></div>
+    <h2 class="s14-title a d2">¿Listo para llenar<br>tu clínica de pacientes?</h2>
+    <div class="s14-contact a d3">
+      <span>hola@navigy.es</span>
+      <span class="s14-contact-sep">·</span>
+      <span>www.navigy.es</span>
+    </div>
+  </div>
+
+  <div class="s14-watermark">navigy</div>
+</section>
+
+
+<!-- ─── NAV BAR ──────────────────────────────────────────── -->
+<nav class="nb" aria-label="Diapositivas">
+  <button class="nb-btn" id="prev" disabled aria-label="Anterior">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <span class="nb-count" id="cnt">1 / 16</span>
+  <button class="nb-btn" id="next" aria-label="Siguiente">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+</nav>
+
+<script>
+  const slides   = document.querySelectorAll('.slide');
+  const cnt      = document.getElementById('cnt');
+  const prev     = document.getElementById('prev');
+  const next     = document.getElementById('next');
+  const progress = document.getElementById('progress');
+  const total    = slides.length;
+  let cur = 0;
+
+  function go(n) {
+    if (n < 0 || n >= total) return;
+    slides[cur].classList.remove('active');
+    cur = n;
+    slides[cur].classList.add('active');
+    cnt.textContent = `${cur + 1} / ${total}`;
+    prev.disabled = cur === 0;
+    next.disabled = cur === total - 1;
+    progress.style.width = `${((cur + 1) / total) * 100}%`;
+  }
+
+  go(0);
+
+  prev.addEventListener('click', () => go(cur - 1));
+  next.addEventListener('click', () => go(cur + 1));
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown')  go(cur + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')    go(cur - 1);
+  });
+
+  let tx = null;
+  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend',   e => {
+    if (tx === null) return;
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) go(dx < 0 ? cur + 1 : cur - 1);
+    tx = null;
+  }, { passive: true });
+</script>
+
+</body>
+</html>
